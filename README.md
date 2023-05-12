@@ -5,20 +5,56 @@ Repository ini menggunakan Service Repository Pattern, yang artinya di dalam rep
 
 ## Getting Started
 
-Untuk mulai membuat sebuah implementasi dari HTTP Server, mulainya menginspeksi file [`app/index.js`](./app/index.js), dan lihatlah salah satu contoh `controller` yang ada di [`app/controllers/mainController.js`](./app/controllers/mainController.js)
-
-Lalu untuk menjalankan development server, kalian tinggal jalanin salah satu script di package.json, yang namanya `develop`.
+Perintah untuk menginstall 
 
 ```sh
-yarn develop
+npm i 
 ```
 
-## Database Management
+Perintah untuk membuat database
 
-Di dalam repository ini sudah terdapat beberapa script yang dapat digunakan dalam memanage database, yaitu:
+```sh
+npm sequelize db:create
+```
 
-- `yarn db:create` digunakan untuk membuat database
-- `yarn db:drop` digunakan untuk menghapus database
-- `yarn db:migrate` digunakan untuk menjalankan database migration
-- `yarn db:seed` digunakan untuk melakukan seeding
-- `yarn db:rollback` digunakan untuk membatalkan migrasi terakhir
+Perintah untuk melakukan migrate yang berfungsi untuk membuat atau perubahan pada tabel-tabel di database
+
+```sh
+npm sequelize db:migrate
+```
+
+Perintah untuk melakukan penambahan data super admin
+
+```sh
+npm sequelize db:seed:all
+```
+
+Perintah untuk menjalankan development server dengan salah satu script di package.json, yang namanya `develop`.
+
+```sh
+npm run develop
+```
+
+## API Documentation
+
+| Documentation type | Link | Details |
+|--|--|--|
+| OpenAPI Swagger UI | http://localhost:8000 <br> http://localhost:8000/api-docs |
+
+
+
+
+
+Data super admin untuk login
+
+```json
+"email": "superadmin@gmail.com",
+"password": "adminsuper"
+```
+
+
+API Document
+
+```js
+http://localhost:8081/api-docs
+```
