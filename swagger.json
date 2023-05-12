@@ -13,7 +13,7 @@
     "/register/member": {
       "post": {
         "requestBody": {
-          "description": "Register a new member",
+          "description": "Register a new account",
           "content": {
             "application/json": {
               "schema": {
@@ -50,7 +50,7 @@
           }
         ],
         "requestBody": {
-          "description": "Register a new admin, only superadmin can do this",
+          "description": "Register a new admin",
           "content": {
             "application/json": {
               "schema": {

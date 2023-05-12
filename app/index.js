@@ -1,17 +1,27 @@
 const express = require("express");
-const bodyParser = require("body-parser");
+const morgan = require("morgan");
 const router = require("../config/routes");
-const cors = require("cors");
-const swaggerUI = require("swagger-ui-express");
-const yaml = require("js-yaml");
-const fs = require("fs");
-const swaggerDocument = yaml.load(fs.readFileSync("swagger.yaml", "utf8"));
+const fs = require('fs')
+const path = require("path")
+const cors = require('cors');
+const controller = require("./controllers");
+
 const app = express();
 
-app.use(cors());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-app.use("/api/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
+app.use(cors({
+    origin: '*'
+}));
+
+app.use(morgan('combined'));
+app.use(morgan("dev"))
+
+/** Install JSON request parser */
+app.use(express.json());
+
+app.use(controller.api.main.onParseError)
+app.use(controller.api.main.onError)
+
+/** Install Router */
 app.use(router);
 
 module.exports = app;

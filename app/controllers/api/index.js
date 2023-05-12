@@ -1,9 +1,12 @@
-const carsController = require("./carsController");
-const usersController = require("./usersController");
-const authController = require("./authController");
+/**
+ * @file contains entry point of controllers api module
+ * @author Fikri Rahmat Nurhidayat
+ */
+
+const main = require("./main");
+const v1 = require("./v1");
 
 module.exports = {
-  carsController,
-  usersController,
-  authController,
+  main,
+  v1,
 };
