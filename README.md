@@ -10,6 +10,7 @@ Perintah untuk menginstall
 ```sh
 npm i 
 ```
+## Database Management
 
 Perintah untuk membuat database
 
