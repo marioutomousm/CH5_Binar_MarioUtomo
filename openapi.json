@@ -1,7 +1,7 @@
 {
     "openapi": "3.0.3",
     "info": {
-        "title": "BCR - Car Management API",
+        "title": "BCR - CH5 - Car Management",
         "version": "1.0",
         "description": "cars"
     },
@@ -16,7 +16,7 @@
     "tags": [
         {
             "name": "auth",
-            "description": "Login or register"
+            "description": "Login/register"
         },
         {
             "name": "user",
@@ -41,7 +41,7 @@
                 "tags": [
                     "auth"
                 ],
-                "summary": "Register new member",
+                "summary": "Register new account",
                 "description": "Register new account with member role",
                 "operationId": "registerMember",
                 "security": [
@@ -130,7 +130,7 @@
                 "tags": [
                     "auth"
                 ],
-                "summary": "Login with account",
+                "summary": "Login with email & password",
                 "description": "Login and get bearer token for auth",
                 "operationId": "login",
                 "security": [
@@ -229,13 +229,13 @@
                 }
             }
         },
-        "/whoami": {
+        "/allusers": {
             "get": {
                 "tags": [
                     "user"
                 ],
                 "operationId": "whoAmI",
-                "summary": "Get current user data",
+                "summary": "Get user data",
                 "description": "Return current user data based on bearer token \n\n Allowed roles: superadmin, admin, member",
                 "responses": {
                     "200": {
@@ -357,7 +357,7 @@
                     "user"
                 ],
                 "operationId": "createAdmin",
-                "summary": "Add new admin",
+                "summary": "Add New account admin",
                 "description": "Add new admin account  \n\n Allowed roles: superadmin",
                 "requestBody": {
                     "description": "Required fields [name, email, password]",
