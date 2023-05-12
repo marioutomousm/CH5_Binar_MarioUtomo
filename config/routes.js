@@ -1,32 +1,36 @@
 const express = require("express");
+const path = require("path");
 const controllers = require("../app/controllers");
+const authController = controllers.api.authController;
+const usersController = controllers.api.usersController;
+const carsController = controllers.api.carsController;
+const router = express.Router();
 
-const apiRouter = express.Router();
+router.post("/api/register/member", usersController.register);
+router.post("/api/register/admin",authController.authorize, usersController.registerAdmin);
+router.post("/api/login", authController.login);
 
-/**
- * TODO: Implement your own API
- *       implementations
- */
-apiRouter.get("/api/v1/posts", controllers.api.v1.postController.list);
-apiRouter.post("/api/v1/posts", controllers.api.v1.postController.create);
-apiRouter.put("/api/v1/posts/:id", controllers.api.v1.postController.update);
-apiRouter.get("/api/v1/posts/:id", controllers.api.v1.postController.show);
-apiRouter.delete(
-  "/api/v1/posts/:id",
-  controllers.api.v1.postController.destroy
-);
+router.route("/api/users/:id")
+  .put(usersController.update)
+  .delete(usersController.deleteUser);
 
-/**
- * TODO: Delete this, this is just a demonstration of
- *       error handler
- */
-apiRouter.get("/api/v1/errors", () => {
-  throw new Error(
-    "The Industrial Revolution and its consequences have been a disaster for the human race."
-  );
-});
+router.get("/api/user", authController.authorize, usersController.getCurrentUser);
 
-apiRouter.use(controllers.api.main.onLost);
-apiRouter.use(controllers.api.main.onError);
+router.get("/api/cars/available", carsController.getAvailableCars);
+router.route("/api/cars")
+  .get(authController.authorize,carsController.getCars)
+  .post(authController.authorize,carsController.createCar);
 
-module.exports = apiRouter;
+router.route("/api/cars/:id")
+  .put(authController.authorize, carsController.updateCar)
+  .delete(authController.authorize, carsController.deleteCar)
+
+router.get("/api/api-json", (req, res) => {
+  res.sendFile(path.join(__dirname, "../swagger.json"));
+})
+
+router.get("/api/api-yaml", (req, res) => {
+  res.sendFile(path.join(__dirname, "../swagger.yaml"));
+})
+
+module.exports = router;
